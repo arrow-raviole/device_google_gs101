@@ -18,6 +18,7 @@ BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := device/google/gs101/vendor_dlkm.mo
 TARGET_KERNEL_EXT_MODULE_ROOT := kernel/google/gs101/private/google-modules
 
 # Manifests
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/google/gs101/device_framework_matrix.xml
 DEVICE_MANIFEST_FILE += device/google/gs101/manifest_radio.xml
 
 # Partitions
