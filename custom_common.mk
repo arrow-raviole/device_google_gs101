@@ -27,3 +27,6 @@ PRODUCT_PACKAGES += \
 # Parts
 PRODUCT_PACKAGES += \
     GoogleParts
+
+# Touch
+include device/google/gs101/touch/device.mk
