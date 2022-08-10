@@ -10,6 +10,12 @@ BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/google/gs101/device_framework_matrix.xml
 DEVICE_MANIFEST_FILE += device/google/gs101/manifest_radio.xml
 
+# Kernel
+BOARD_KERNEL_IMAGE_NAME := Image.lz4
+TARGET_KERNEL_CONFIG := slider_gki_defconfig
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
+TARGET_NEEDS_DTBOIMAGE := true
+
 # Partitions
 AB_OTA_PARTITIONS += \
     vendor \
