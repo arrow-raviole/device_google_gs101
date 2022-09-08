@@ -28,7 +28,8 @@ endif
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
 
 # Enable CSI checking
-PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
+#PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
+DISABLE_ARTIFACT_PATH_REQUIREMENTS := true
 
 #
 # All components inherited here go to system_ext image
