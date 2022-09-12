@@ -185,7 +185,7 @@ BOARD_USES_GENERIC_AUDIO := true
 
 $(call soong_config_set,aoc_audio_func,ext_hidl,true)
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 $(call soong_config_set,aoc_audio_func,dump_usecase_data,true)
 $(call soong_config_set,aoc_audio_func,hal_socket_control,true)
 $(call soong_config_set,aoc_audio_func,record_tunning_keys,true)
@@ -338,12 +338,10 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 # Vendor ramdisk image for kernel development
 BOARD_BUILD_VENDOR_RAMDISK_IMAGE := true
 
-BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := device/google/raviole/vendor_dlkm.modules.blocklist
-
 # Using BUILD_COPY_HEADERS
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
-include device/google/gs101-sepolicy/gs101-sepolicy.mk
+include device/google/gs101/sepolicy/gs101-sepolicy.mk
 
 # Battery options
 BOARD_KERNEL_CMDLINE += at24.write_timeout=100
@@ -356,4 +354,4 @@ BOARD_PVMFWIMAGE_PARTITION_SIZE := 0x00100000
 
 -include vendor/google_devices/gs101/proprietary/BoardConfigVendor.mk
 
-include device/google/gs101/BoardConfig-custom.mk
+include device/google/gs101/BoardConfigLineage.mk

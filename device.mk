@@ -68,7 +68,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_SOONG_NAMESPACES += \
 	vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 #Set IKE logs to verbose for WFC
 PRODUCT_PROPERTY_OVERRIDES += log.tag.IKE=VERBOSE
 
@@ -89,7 +89,7 @@ endif
 
 include device/google/gs101/modem/user.mk
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 # b/36703476: Set default log size to 1M
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.logd.size=1M
@@ -268,7 +268,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.gs101.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.rc
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.debug.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.debug.rc
 endif
@@ -316,7 +316,7 @@ PRODUCT_PACKAGES += \
     android.hardware.contexthub-service.generic
 
 # CHRE tools
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
 	chre_power_test_client \
 	chre_test_client
@@ -342,7 +342,7 @@ PRODUCT_PACKAGES += \
 	checkpoint_gc
 
 # Vendor verbose logging default property
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.verbose_logging_enabled=true
 else
@@ -360,7 +360,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.sys.modem.logging.enable=true
 
 # Enable silent CP crash handling
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.ril.crash_handling_mode=1
 else
@@ -421,7 +421,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
 
 # default usb debug functions
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.usb.usbradio.config=dm
 endif
@@ -452,11 +452,13 @@ PRODUCT_PACKAGES += \
 	aocd
 
 # AoC debug support
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES_DEBUG += \
 	aocdump \
 	aocutil \
 	aoc_audio_cfg \
 	vp_util
+endif
 
 #
 # Audio HALs
@@ -555,6 +557,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
         ConnectivityOverlay
 
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES_DEBUG += \
 	sg_write_buffer \
 	f2fs_io \
@@ -562,6 +565,7 @@ PRODUCT_PACKAGES_DEBUG += \
 	f2fsstat \
 	f2fs.fibmap \
 	dump.f2fs
+endif
 
 # Storage health HAL
 PRODUCT_PACKAGES += \
@@ -573,7 +577,7 @@ PRODUCT_PACKAGES += \
 # Enable project quotas and casefolding for emulated storage without sdcardfs
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression_with_xor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
@@ -642,7 +646,7 @@ PRODUCT_PACKAGES += \
 	libdisplaycolor \
 	hwcomposer.$(TARGET_BOARD_PLATFORM)
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += displaycolor_service
 endif
 
@@ -721,7 +725,7 @@ PRODUCT_PACKAGES += wpa_supplicant.conf
 
 WIFI_PRIV_CMD_UPDATE_MBO_CELL_STATUS := enabled
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += wpa_cli
 PRODUCT_PACKAGES += hostapd_cli
 endif
@@ -810,7 +814,9 @@ $(call inherit-product, system/core/trusty/trusty-storage.mk)
 $(call inherit-product, system/core/trusty/trusty-base.mk)
 
 # Trusty unit test tool
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES_DEBUG += trusty-ut-ctrl
+endif
 
 include device/google/gs101/confirmationui/confirmationui.mk
 
@@ -830,7 +836,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 
 # System props to enable Bluetooth Quality Report (BQR) feature
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.bluetooth.bqr.event_mask=262174 \
 	persist.bluetooth.bqr.min_interval_ms=500
@@ -875,7 +881,7 @@ PRODUCT_PACKAGES += \
 	Iwlan
 
 #Iwlan test app for userdebug/eng builds
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
 	IwlanTestApp
 endif
@@ -900,8 +906,10 @@ PRODUCT_PACKAGES += ShannonIms
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/shannon-iwlan/device-vendor.mk)
 
 #RCS Test Messaging App
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES_DEBUG += \
 	TestRcsApp
+endif
 
 PRODUCT_PACKAGES += ShannonRcs
 
@@ -977,11 +985,13 @@ PRODUCT_COPY_FILES += \
 ARM_COMPUTE_CL_ENABLE := 1
 
 # Vibrator Diag
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES_DEBUG += \
 	diag-vibrator \
 	diag-vibrator-cs40l25a \
 	diag-vibrator-drv2624 \
 	$(NULL)
+endif
 
 PRODUCT_PACKAGES += \
 	android.hardware.health-service.gs101 \
@@ -1076,7 +1086,7 @@ PRODUCT_PACKAGES += vndservicemanager
 PRODUCT_PACKAGES += vndservice
 
 # TinyTools, debug tool and cs35l41 speaker calibration tool for Audio
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
 	tinyplay \
 	tinycap \
@@ -1161,7 +1171,9 @@ include device/google/gs101/telephony/user.mk
 include hardware/google/pixel/wifi_ext/device.mk
 
 # Battery Stats Viewer
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES_DEBUG += BatteryStatsViewer
+endif
 
 # Install product specific framework compatibility matrix
 # (TODO: b/169535506) This includes the FCM for system_ext and product partition.
