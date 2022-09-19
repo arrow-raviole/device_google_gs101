@@ -6,6 +6,9 @@
 
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
+TARGET_KERNEL_ADDITIONAL_FLAGS := \
+    HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
+
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.lz4
 TARGET_KERNEL_CONFIG := slider_gki_defconfig
