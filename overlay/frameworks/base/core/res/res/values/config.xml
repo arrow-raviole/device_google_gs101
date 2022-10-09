@@ -235,9 +235,6 @@
         <item>"/system_ext/priv-app/SystemUI/SystemUI.apk"</item>
     </string-array>
 
-    <!-- Should the pinner service pin the Home application? -->
-    <bool name="config_pinnerHomeApp">true</bool>
-
     <!-- The default intensity level for alarm vibrations. See
          Settings.System.ALARM_VIBRATION_INTENSITY more details on the constant values and
          meanings. -->
@@ -275,4 +272,7 @@
         <item>"com.shannon.imsservice"</item>
         <item>"com.android.phone"</item>
     </string-array>
+
+    <!-- How long it takes for the HW to start illuminating after the illumination is requested. -->
+    <integer name="config_udfps_illumination_transition_ms">0</integer>
 </resources>

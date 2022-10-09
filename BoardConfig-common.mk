@@ -43,7 +43,6 @@ TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 endif
 
-BOARD_KERNEL_CMDLINE += dyndbg=\"func alloc_contig_dump_pages +p\"
 BOARD_KERNEL_CMDLINE += earlycon=exynos4210,0x10A00000 console=ttySAC0,115200 androidboot.console=ttySAC0 printk.devkmsg=on
 BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
@@ -341,7 +340,7 @@ BOARD_BUILD_VENDOR_RAMDISK_IMAGE := true
 # Using BUILD_COPY_HEADERS
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
-include device/google/gs101/sepolicy/gs101-sepolicy.mk
+include device/google/gs101-sepolicy/gs101-sepolicy.mk
 
 # Battery options
 BOARD_KERNEL_CMDLINE += at24.write_timeout=100

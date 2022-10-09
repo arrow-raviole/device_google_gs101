@@ -7,6 +7,9 @@
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 RELAX_USES_LIBRARY_CHECK=true
 
+TARGET_KERNEL_ADDITIONAL_FLAGS := \
+    HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
+
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.lz4
 TARGET_KERNEL_CONFIG := slider_gki_defconfig
@@ -19,7 +22,8 @@ BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := device/google/gs101/vendor_dlkm.mo
 TARGET_KERNEL_EXT_MODULE_ROOT := kernel/google/gs101/private/google-modules
 
 # Manifests
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/google/gs101/device_framework_matrix.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs101/matrix/device_product_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/google/gs101/matrix/device_framework_matrix.xml
 DEVICE_MANIFEST_FILE += device/google/gs101/manifest_radio.xml
 
 # Partitions
@@ -27,6 +31,7 @@ AB_OTA_PARTITIONS += \
     vendor \
     vendor_dlkm
 
+BOARD_USES_VENDOR_DLKMIMAGE := true
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
